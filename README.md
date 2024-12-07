@@ -2,6 +2,12 @@
 
 Made a quick CLI that tracks user activity in GitHub
 
+## How to run
+
+```bash
+./github-user-activity <gh-username>
+```
+
 ### Features
 
 Later in the future
