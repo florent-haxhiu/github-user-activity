@@ -83,14 +83,6 @@ func getEventsForEachRepo(events []Event) map[string]map[string]int {
 		} else {
 			eventsForUser[event.Type][event.Repo.Name] += 1
 		}
-		// if event.Type == "PushEvent" {
-		// 	_, exist := pushForEachRepo[event.Repo.Name]
-		// 	if !exist {
-		// 		pushForEachRepo[event.Repo.Name] = 1
-		// 	} else {
-		// 		pushForEachRepo[event.Repo.Name] += 1
-		// 	}
-		// }
 	}
 
 	return eventsForUser
