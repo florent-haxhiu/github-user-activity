@@ -82,6 +82,8 @@ func getEventsForEachRepo(events []Event) map[string]map[string]int {
 		_, e := eventsForUser[event.Type][event.Repo.Name]
 		if !e {
 			eventsForUser[event.Type][event.Repo.Name] = 1
+			eventsForUser[event.Type]["timeElapsed"] = int(event.CreatedAt.UnixNano())
+			// eventsForUser[event.Type]["date"] = event.CreatedAt
 		} else {
 			eventsForUser[event.Type][event.Repo.Name] += 1
 		}
