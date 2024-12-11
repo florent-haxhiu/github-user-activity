@@ -88,11 +88,6 @@ func getEventsForEachRepo(events []Event) map[string]map[string]int {
 	return eventsForUser
 }
 
-func increment(i int) int {
-	i += 1
-	return i
-}
-
 func callEndpoint(token string, username string) []Event {
 	client := &http.Client{
 		Timeout: 10 * time.Second,
@@ -101,7 +96,6 @@ func callEndpoint(token string, username string) []Event {
 	formattedUrl := fmt.Sprintf("https://api.github.com/users/%s/events", username)
 
 	req, err := http.NewRequest("GET", formattedUrl, nil)
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -121,7 +115,6 @@ func callEndpoint(token string, username string) []Event {
 
 	var listOfEvents []Event
 	err = json.NewDecoder(resp.Body).Decode(&listOfEvents)
-
 	if err != nil {
 		log.Fatal(err)
 	}
