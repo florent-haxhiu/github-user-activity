@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,10 +24,11 @@ type Repo struct {
 }
 
 type Event struct {
-	ID    string `json:"id"`
-	Type  string `json:"type"`
-	Actor Actor  `json:"actor"`
-	Repo  Repo   `json:"repo"`
+	ID        string    `json:"id,omitempty"`
+	Type      string    `json:"type,omitempty"`
+	Actor     Actor     `json:"actor,omitempty"`
+	Repo      Repo      `json:"repo,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
 }
 
 func main() {
@@ -35,10 +37,10 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	username := os.Args[1]
+	username := flag.String("username", "florent-haxhiu", "github username")
 	token := os.Getenv("GHTOKEN")
 
-	events := callEndpoint(token, username)
+	events := callEndpoint(token, *username)
 	organisedEvents := getEventsForEachRepo(events)
 
 	outputs := getOutputs(organisedEvents)
